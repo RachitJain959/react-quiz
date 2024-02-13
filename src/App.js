@@ -14,6 +14,9 @@ function reducer(state, action) {
     case 'dataReceived':
       return { ...state, questions: action.payload, status: 'ready' };
 
+    case 'dataFailed':
+      return { ...state, status: 'error' };
+
     default:
       throw new Error('Action unknown');
   }
@@ -24,9 +27,16 @@ export default function App() {
 
   useEffect(function () {
     async function fetchData() {
-      const res = await fetch('http://localhost:8000/questions');
-      const data = await res.json();
-      dispatch({ type: 'dataReceived', payload: data });
+      try {
+        const res = await fetch('http://localhost:8000/questions');
+        if (!res.ok) {
+          throw new Error('Data not received');
+        }
+        const data = await res.json();
+        dispatch({ type: 'dataReceived', payload: data });
+      } catch (err) {
+        dispatch({ type: 'dataFailed' });
+      }
     }
     fetchData();
   }, []);
