@@ -20,6 +20,7 @@ const initialState = {
   answer: null,
   points: 0,
   highScore: 0,
+  timeRemaining: 10,
 };
 
 function reducer(state, action) {
@@ -58,14 +59,19 @@ function reducer(state, action) {
     case 'restart':
       return { ...initialState, status: 'ready', questions: state.questions };
 
+    case 'timer':
+      return { ...state, timeRemaining: state.timeRemaining - 1 };
+
     default:
       throw new Error('Action unknown');
   }
 }
 
 export default function App() {
-  const [{ status, questions, index, answer, points, highScore }, dispatch] =
-    useReducer(reducer, initialState);
+  const [
+    { status, questions, index, answer, points, highScore, timeRemaining },
+    dispatch,
+  ] = useReducer(reducer, initialState);
 
   const numQuestions = questions.length;
   const maxPoints = questions.reduce((prev, curr) => prev + curr.points, 0);
@@ -110,7 +116,7 @@ export default function App() {
               answer={answer}
             />
             <Footer>
-              <Timer />
+              <Timer dispatch={dispatch} timeRemaining={timeRemaining} />
               <NextQuestion
                 dispatch={dispatch}
                 answer={answer}
