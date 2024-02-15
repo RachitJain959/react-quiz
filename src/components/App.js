@@ -8,6 +8,7 @@ import Question from './Question';
 import NextQuestion from './NextQuestion';
 import Progress from './Progress';
 import FinishScreen from './FinishScreen';
+import Footer from './Footer';
 
 const initialState = {
   questions: [],
@@ -107,6 +108,7 @@ export default function App() {
               dispatch={dispatch}
               answer={answer}
             />
+            <Footer />
             <NextQuestion
               dispatch={dispatch}
               answer={answer}
