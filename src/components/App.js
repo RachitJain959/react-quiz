@@ -20,7 +20,7 @@ const initialState = {
   answer: null,
   points: 0,
   highScore: 0,
-  timeRemaining: 10,
+  timeRemaining: 5,
 };
 
 function reducer(state, action) {
@@ -60,7 +60,11 @@ function reducer(state, action) {
       return { ...initialState, status: 'ready', questions: state.questions };
 
     case 'timer':
-      return { ...state, timeRemaining: state.timeRemaining - 1 };
+      return {
+        ...state,
+        timeRemaining: state.timeRemaining - 1,
+        status: state.timeRemaining === 0 ? 'finished' : state.status,
+      };
 
     default:
       throw new Error('Action unknown');
