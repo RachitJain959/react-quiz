@@ -24,11 +24,7 @@ export default function App() {
         {status === 'active' && (
           <>
             <Progress />
-            <Question
-              question={questions[index]}
-              dispatch={dispatch}
-              answer={answer}
-            />
+            <Question />
             <Footer>
               <Timer dispatch={dispatch} timeRemaining={timeRemaining} />
               <NextQuestion
