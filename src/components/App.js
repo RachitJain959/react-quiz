@@ -1,4 +1,3 @@
-import { useEffect, useReducer } from 'react';
 import Header from './Header';
 import Main from './Main';
 import Loader from './Loader';
@@ -26,24 +25,12 @@ export default function App() {
             <Progress />
             <Question />
             <Footer>
-              <Timer dispatch={dispatch} timeRemaining={timeRemaining} />
-              <NextQuestion
-                dispatch={dispatch}
-                answer={answer}
-                index={index}
-                numQuestions={numQuestions}
-              />
+              <Timer />
+              <NextQuestion />
             </Footer>
           </>
         )}
-        {status === 'finished' && (
-          <FinishScreen
-            points={points}
-            maxPoints={maxPoints}
-            highScore={highScore}
-            dispatch={dispatch}
-          />
-        )}
+        {status === 'finished' && <FinishScreen />}
       </Main>
     </div>
   );
