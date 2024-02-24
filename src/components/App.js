@@ -26,8 +26,13 @@ export default function App() {
             <Progress />
             <Question />
             <Footer>
-              <Timer />
-              <NextQuestion />
+              <Timer dispatch={dispatch} timeRemaining={timeRemaining} />
+              <NextQuestion
+                dispatch={dispatch}
+                answer={answer}
+                index={index}
+                numQuestions={numQuestions}
+              />
             </Footer>
           </>
         )}
